@@ -4,12 +4,13 @@
     <ul>
         <li><a href="index.jsp">Home</a></li>
         <li><a href="RegistrationView.jsp">Register</a></li>
-           <%-- <%if (request.getSession().getAttribute("user_session")==null) { %> --%>
-        <li><a href="LoginView.jsp">Login</a></li> 
-           <%-- <%}%>
-            <%if (request.getSession().getAttribute("user_session")==null) { %>  --%>
-        <li><a href="LogoutController">Logout</a></li>
-           <%-- <%}%> --%>
         <li><a href="#">Upload</a></li>
+            <%if (request.getSession().getAttribute("user_session") == null) { %>
+        <li><a href="LoginView.jsp">Login</a></li> 
+            <%}%>
+            <%if (request.getSession().getAttribute("user_session") != null) { %>
+        <li><a href="LogoutController">Logout</a></li>
+            <%}%>
+
     </ul>
 </nav>
