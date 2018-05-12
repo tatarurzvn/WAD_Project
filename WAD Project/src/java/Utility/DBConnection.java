@@ -1,6 +1,7 @@
 
 package Utility;
 
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.*;
@@ -13,7 +14,7 @@ public class DBConnection {
     private static final String PASSWORD = "";
     private Connection connection;
 
-    public Connection getConnection() {
+    public Connection getConnection() throws FileNotFoundException {
         if (connection == null) {
             try {
                 Class.forName(DATABASE_DRIVER);
