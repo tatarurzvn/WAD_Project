@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     
-    <%@ include file="WEB-INF/nav.jspf"%>
+    
     <body>
         <%!
             public void jspInit() {
@@ -20,7 +20,7 @@
 
         %>
         <div id="content">
-
+            <%@ include file="WEB-INF/nav.jspf"%>
             <h1>Login </h1>   
             <form method="post"  action="LoginController"> 
                 <div class="form-element">

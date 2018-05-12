@@ -1,8 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : May 12, 2018, 3:50:18 PM
-    Author     : Radu
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,9 +12,16 @@
     </head>
 
     <body>
+        <%!
+            public void jspInit() {
+                System.out.print("Started");
+            }
+
+        %>
         <%@ include file="WEB-INF/nav.jspf"%>
         <div>
             <h1>BABOCLABO</h1>
+            <h2>Hello, ${sessionScope.user_session}!</h2>
         </div>
     </body>
 </html>

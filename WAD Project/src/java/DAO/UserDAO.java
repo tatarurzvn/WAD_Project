@@ -29,18 +29,14 @@ public class UserDAO {
 
         Connection con = new DBConnection().getConnection();
         Statement instr = con.createStatement();
-        String sql = "SELECT * FROM emojo.users";
+        String sql = "SELECT * FROM emojo.users WHERE username='"+name+"';";
         ResultSet rs = instr.executeQuery(sql);
 
         if (rs == null) {
             return false;
         }
-        while (rs.next()) {
-            if (name.equals(rs.getString(4))) {
-                return true;
-            }
-        }
-        return false;
+        else return true;
+       // return false;
     }
 
     public void insertUser(String fname, String lname, String email, String uname, String pass) throws SQLException {

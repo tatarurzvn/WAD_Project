@@ -1,10 +1,6 @@
-<%-- 
-    Document   : register
-    Created on : May 12, 2018, 3:48:20 PM
-    Author     : Radu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,8 +10,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     
-    <%@ include file="WEB-INF/nav.jspf"%>
     <body>
+        <%!
+            public void jspInit() {
+                System.out.print("Started");
+            }
+
+        %>
+        <%@ include file="WEB-INF/nav.jspf"%>
         <h1>Registration form</h1>   
             <form method="post"  action="RegistrationController"> 
                 <div class="form-element">
@@ -47,8 +49,9 @@
                     <input type="submit" value="Submit">
                     <input type="reset" value="Reset">
                 </div>  
-
-
             </form>
+        <c:forEach items="${requestScope.RegistrationErrors}" var="error">
+            <p>${error}</p>
+        </c:forEach>
     </body>
 </html>
