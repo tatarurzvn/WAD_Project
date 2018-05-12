@@ -12,6 +12,10 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>Controllers.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadController</servlet-name>
+        <servlet-class>Controllers.UploadController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationController</servlet-name>
         <url-pattern>/RegistrationController</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadController</servlet-name>
+        <url-pattern>/UploadController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

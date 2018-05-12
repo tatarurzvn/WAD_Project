@@ -22,7 +22,7 @@
         <div id="content">
             <%@ include file="WEB-INF/nav.jspf"%>
             <h1>Upload</h1>   
-            <form method="post"  action="UploadController"> 
+            <form method="post"  action="UploadController" enctype="multipart/form-data"> 
                 <div class="form-element">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" required>

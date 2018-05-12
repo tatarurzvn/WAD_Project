@@ -6,6 +6,7 @@
 package DAO;
 
 import Utility.DBConnection;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class UserDAO {
     private UserDAO() {
     }
 
-    public boolean userExists(String name) throws SQLException {
+    public boolean userExists(String name) throws SQLException, FileNotFoundException {
 
         Connection con = new DBConnection().getConnection();
         Statement instr = con.createStatement();
@@ -39,7 +40,7 @@ public class UserDAO {
        // return false;
     }
 
-    public void insertUser(String fname, String lname, String email, String uname, String pass) throws SQLException {
+    public void insertUser(String fname, String lname, String email, String uname, String pass) throws SQLException, FileNotFoundException {
 
         Connection con = new DBConnection().getConnection();
         Statement instr = con.createStatement();
@@ -48,7 +49,7 @@ public class UserDAO {
         instr.executeUpdate(sql);
     }
 
-    public boolean login(String uname, String pass) throws SQLException {
+    public boolean login(String uname, String pass) throws SQLException, FileNotFoundException {
 
         Connection con = new DBConnection().getConnection();
         Statement instr = con.createStatement();
