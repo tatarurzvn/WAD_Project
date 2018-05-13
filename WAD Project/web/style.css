@@ -31,3 +31,13 @@ li a {
     padding: 16px;
     text-decoration: none;
 }
+
+table {
+    border: 1px solid black;
+    margin: auto;
+}
+
+td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
