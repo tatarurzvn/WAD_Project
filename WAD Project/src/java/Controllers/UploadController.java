@@ -37,9 +37,9 @@ public class UploadController extends HttpServlet {
         Part filePart = request.getPart("img");
         if (filePart != null) {
             // prints out some information for debugging
-            System.out.println(filePart.getName());
+            /*System.out.println(filePart.getName());
             System.out.println(filePart.getSize());
-            System.out.println(filePart.getContentType());
+            System.out.println(filePart.getContentType());*/
 
             //obtains input stream of the upload file
             //the InputStream will point to a stream that contains
@@ -51,6 +51,7 @@ public class UploadController extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(UploadController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

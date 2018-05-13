@@ -30,13 +30,14 @@ public class UserDAO {
 
         Connection con = new DBConnection().getConnection();
         Statement instr = con.createStatement();
-        String sql = "SELECT * FROM emojo.users WHERE username='"+name+"';";
+        String sql = "SELECT * FROM emojo.users;";
         ResultSet rs = instr.executeQuery(sql);
 
-        if (rs == null) {
-            return false;
+        while(rs.next()) {
+            if(name.equals(rs.getString(4)))
+                return true;
         }
-        else return true;
+        return false;
        // return false;
     }
 
@@ -47,6 +48,7 @@ public class UserDAO {
 
         String sql = "INSERT INTO users (first_name, last_name, email, username, password) VALUES ('" + fname + "', '" + lname + "', '" + email + "', '" + uname + "', PASSWORD('" + pass + "'));";
         instr.executeUpdate(sql);
+        System.out.println("user has been inserted");
     }
 
     public boolean login(String uname, String pass) throws SQLException, FileNotFoundException {

@@ -1,14 +1,14 @@
 package DAO;
 
 import Utility.DBConnection;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
 
 public class ImageDAO {
 
@@ -43,6 +43,22 @@ public class ImageDAO {
             //sends the statement to the database server
             pstmtSave.executeUpdate();
 
+    }
+    
+    public HashMap<Integer, String> getImageList() throws FileNotFoundException, SQLException{
+        Connection con=new DBConnection().getConnection();
+        String sql = "SELECT * FROM emojo.emoji";
+        Statement instr = con.createStatement();
+        HashMap<Integer,String> images=new HashMap<>();
+        ResultSet rs = instr.executeQuery(sql);
+        while (rs.next()) {
+            images.put(Integer.parseInt(rs.getString(1)),rs.getString(2));
+        }
+        for(HashMap.Entry<Integer, String> i : images.entrySet())
+        {
+            System.out.println(i.getKey()+" "+i.getValue());
+        }
+        return images;
     }
 
 }
