@@ -1,4 +1,3 @@
-
 package Controllers;
 
 import DAO.ImageDAO;
@@ -6,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -30,24 +32,28 @@ public class UploadController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, FileNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
+
+        List<String> errors = new ArrayList<>();
+
         String name = request.getParameter("name");
         String desc = request.getParameter("desc");
-        InputStream inputStream = null; // input stream of the upload file
-        // obtains the upload file part in this multipart request
+        InputStream inputStream = null;
         Part filePart = request.getPart("img");
-        if (filePart != null) {
-            // prints out some information for debugging
-            /*System.out.println(filePart.getName());
-            System.out.println(filePart.getSize());
-            System.out.println(filePart.getContentType());*/
 
-            //obtains input stream of the upload file
-            //the InputStream will point to a stream that contains
-            //the contents of the file
+        HashMap<Integer, String> images = new HashMap<>();
+        if (filePart != null) {
             inputStream = filePart.getInputStream();
         }
         try {
-            ImageDAO.getInstance().insertImage(name, inputStream, desc);
+            if (request.getSession().getAttribute("user_session") == null) {
+                errors.add("You must be logged in to upload!");
+                request.setAttribute("errors", errors);
+                request.getRequestDispatcher("LoginView.jsp").forward(request, response);
+            } else {
+                ImageDAO.getInstance().insertImage(name, inputStream, desc);
+                images = ImageDAO.getInstance().getImageList();
+                request.setAttribute("images", images);
+            }
             //update list of images
         } catch (SQLException ex) {
             Logger.getLogger(UploadController.class.getName()).log(Level.SEVERE, null, ex);

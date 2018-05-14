@@ -19,7 +19,7 @@
 
         %>
         <%@ include file="WEB-INF/nav.jspf"%>
-        <h1>Registration form</h1>   
+        <h1>Register</h1>   
             <form method="post"  action="RegistrationController"> 
                 <div class="form-element">
                     <label for="fname">First Name</label>

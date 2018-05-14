@@ -20,18 +20,20 @@
         <%@ include file="WEB-INF/nav.jspf"%>
         <div>
             <h1>Emojo</h1>
-            <h2>Hello, ${sessionScope.user_session}!</h2>
+            <%if (request.getSession().getAttribute("user_session") != null) { %>
+            <h2>Hello, ${sessionScope.user_session}!</h2> 
+            <%}%>
             <table>
                 <tr>
                     <c:forEach var="image" items="${applicationScope.images}" varStatus="i"> <%--${i.index}--%>
                         <c:if test="${i.index%3==0}">
                         </tr><tr>
                         </c:if>
-                            <td><a href="ImageController.jsp">${image.key}, ${image.value}</a></td>
+                        <td><a href="ImageController.jsp">${image.key}, ${image.value}</a></td>
                         <c:if test="${i.count%3==0}">
                         </tr><tr>
                         </c:if>
-                        <td>${image.key}, ${image.value}</td>
+                        <%--<td>${image.key}, ${image.value}</td>--%>
                     </c:forEach>
                 </tr>
             </table>
