@@ -26,17 +26,18 @@ public class ImageDAO {
 
 
 
-    public void insertImage(String name, InputStream in, String desc) throws FileNotFoundException, SQLException{
+    public void insertImage(String name, InputStream in, String desc, String user) throws FileNotFoundException, SQLException{
         Connection con = new DBConnection().getConnection();
 
   
             // connects to the database
             // constructs SQL statement
-            String sql = "INSERT INTO emojo.emoji (name, image, description) values (?, ?, ?)";
+            String sql = "INSERT INTO emojo.emoji (name, image, description, user) values (?, ?, ?, ?)";
             //Using a PreparedStatement to save the file
             PreparedStatement pstmtSave = con.prepareStatement(sql);
             pstmtSave.setString(1, name);
             pstmtSave.setString(3, desc);
+            pstmtSave.setString(4, user);
             if (in != null)
                 pstmtSave.setBlob(2, in);
 

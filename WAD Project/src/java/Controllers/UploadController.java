@@ -50,7 +50,8 @@ public class UploadController extends HttpServlet {
                 request.setAttribute("errors", errors);
                 request.getRequestDispatcher("LoginView.jsp").forward(request, response);
             } else {
-                ImageDAO.getInstance().insertImage(name, inputStream, desc);
+                String user = request.getSession().getAttribute("user_session").toString();
+                ImageDAO.getInstance().insertImage(name, inputStream, desc,user);
                 images = ImageDAO.getInstance().getImageList();
                 request.setAttribute("images", images);
             }
