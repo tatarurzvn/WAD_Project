@@ -42,13 +42,14 @@ public class RegistrationController extends HttpServlet {
                 Object objOri = en.nextElement();
                 String param = (String) objOri;
                 String value = request.getParameter(param);
+                
                 if ("uname".equals(param) && UserDAO.getInstance().userExists(value)) {
                     VALID = false;
                 }
                 if ("uname".equals(param) && !UserDAO.getInstance().userExists(value)) {
                     VALID = true;
                 }
-                
+                System.out.println(VALID+" "+value);
                 l.add(value);
 
 
