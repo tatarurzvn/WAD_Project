@@ -20,8 +20,7 @@ public class ImageListener implements ServletContextListener {
             images=ImageDAO.getInstance().getImageList();
             sce.getServletContext().setAttribute("images", images);
         } catch (SQLException | FileNotFoundException ex) {
-            Logger.getLogger(ImageListener.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
 
     } 
 

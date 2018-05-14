@@ -48,6 +48,7 @@ public class UploadController extends HttpServlet {
         }
         try {
             ImageDAO.getInstance().insertImage(name, inputStream, desc);
+            //update list of images
         } catch (SQLException ex) {
             Logger.getLogger(UploadController.class.getName()).log(Level.SEVERE, null, ex);
         }

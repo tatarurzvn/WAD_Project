@@ -28,7 +28,10 @@
                         </tr><tr>
                         </c:if>
                             <td><a href="ImageController.jsp">${image.key}, ${image.value}</a></td>
-
+                        <c:if test="${i.count%3==0}">
+                        </tr><tr>
+                        </c:if>
+                        <td>${image.key}, ${image.value}</td>
                     </c:forEach>
                 </tr>
             </table>
