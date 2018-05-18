@@ -26,11 +26,11 @@ CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` mediumtext,
   `user` int(11) DEFAULT NULL,
-  `emoji` int(11) DEFAULT NULL,
+  `image` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_idx` (`user`),
-  KEY `emoji_idx` (`emoji`),
-  CONSTRAINT `emoji` FOREIGN KEY (`emoji`) REFERENCES `users` (`id`),
+  KEY `emoji_idx` (`image`),
+  CONSTRAINT `image` FOREIGN KEY (`image`) REFERENCES `images` (`id`),
   CONSTRAINT `user` FOREIGN KEY (`user`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-12 15:38:18
+-- Dump completed on 2018-05-18 23:35:12

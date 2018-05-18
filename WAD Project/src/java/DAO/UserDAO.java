@@ -68,5 +68,30 @@ public class UserDAO {
         }
         return false;
     }
-
+    
+    public String getUsername(int id) throws SQLException, FileNotFoundException{
+        Connection con = new DBConnection().getConnection();
+        String sql = "SELECT * FROM emojo.users WHERE id='"+id+"'";
+        Statement instr = con.createStatement();
+        ResultSet rs = instr.executeQuery(sql);
+        
+        while(rs.next()){
+            return rs.getString(5);
+        }
+        
+        return null;
+    }
+    
+    public int getUserID(String uname) throws SQLException, FileNotFoundException{
+        Connection con = new DBConnection().getConnection();
+        String sql = "SELECT * FROM emojo.users WHERE username='"+uname+"'";
+        Statement instr = con.createStatement();
+        ResultSet rs = instr.executeQuery(sql);
+        
+        while(rs.next()){
+            return rs.getInt(1);
+        }
+        
+        return -1;
+    }
 }

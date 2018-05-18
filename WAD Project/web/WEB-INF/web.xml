@@ -20,6 +20,14 @@
         <servlet-name>UploadController</servlet-name>
         <servlet-class>Controllers.UploadController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImageController</servlet-name>
+        <servlet-class>Controllers.ImageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentController</servlet-name>
+        <servlet-class>Controllers.CommentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationController</servlet-name>
         <url-pattern>/RegistrationController</url-pattern>
@@ -35,6 +43,14 @@
     <servlet-mapping>
         <servlet-name>UploadController</servlet-name>
         <url-pattern>/UploadController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageController</servlet-name>
+        <url-pattern>/ImageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentController</servlet-name>
+        <url-pattern>/CommentController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

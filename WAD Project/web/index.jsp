@@ -29,7 +29,7 @@
                         <c:if test="${i.index%3==0}">
                         </tr><tr>
                         </c:if>
-                        <td><a href="ImageController.jsp">${image.key}, ${image.value}</a></td>
+                        <td><a href="ImageController?id=${image.key}&name=${image.value}">${image.value}</a></td>
                         <c:if test="${i.count%3==0}">
                         </tr><tr>
                         </c:if>

@@ -1,24 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controllers;
 
-import DAO.ImageDAO;
+import DAO.CommentDAO;
+import DAO.UserDAO;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-@MultipartConfig(maxFileSize = 16177215)
-public class UploadController extends HttpServlet {
+/**
+ *
+ * @author Radu
+ */
+public class CommentController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,37 +34,25 @@ public class UploadController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FileNotFoundException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        List<String> errors = new ArrayList<>();
-
-        String name = request.getParameter("name");
-        String desc = request.getParameter("desc");
-        InputStream inputStream = null;
-        Part filePart = request.getPart("img");
-
-        HashMap<Integer, String> images = new HashMap<>();
-        if (filePart != null) {
-            inputStream = filePart.getInputStream();
+        try (PrintWriter out = response.getWriter()) {
+        
+            String name=request.getParameter("name");
+            String content = request.getParameter("comment");
+            int id=Integer.parseInt(request.getParameter("id"));
+            int user=UserDAO.getInstance().getUserID(request.getSession().getAttribute("user_session").toString());
+            String image=request.getParameter("imageRequest");
+            System.out.println(id+" "+user);
+            CommentDAO.getInstance().insertComment(content, user, id);
+            request.setAttribute("comments", CommentDAO.getInstance().getComments(id));
+            request.setAttribute("id", id);
+            request.setAttribute("name", name);
+            request.setAttribute("imageRequest", image);
+            request.getRequestDispatcher("ImageView.jsp").forward(request, response);
+        } catch (SQLException | FileNotFoundException ex) {
+            Logger.getLogger(CommentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            if (request.getSession().getAttribute("user_session") == null) {
-                errors.add("You must be logged in to upload!");
-                request.setAttribute("errors", errors);
-                request.getRequestDispatcher("LoginView.jsp").forward(request, response);
-            } else {
-                String user = request.getSession().getAttribute("user_session").toString();
-                ImageDAO.getInstance().insertImage(name, inputStream, desc,user);
-                images = ImageDAO.getInstance().getImageList();
-                request.setAttribute("images", images);
-                
-            }
-            //update list of images
-        } catch (SQLException ex) {
-            Logger.getLogger(UploadController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

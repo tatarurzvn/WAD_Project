@@ -1,24 +1,22 @@
+
 package Controllers;
 
+import DAO.CommentDAO;
 import DAO.ImageDAO;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-@MultipartConfig(maxFileSize = 16177215)
-public class UploadController extends HttpServlet {
+public class ImageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,37 +28,39 @@ public class UploadController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FileNotFoundException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        OutputStream oImage;
+        response.setContentType("image");
 
-        List<String> errors = new ArrayList<>();
-
-        String name = request.getParameter("name");
-        String desc = request.getParameter("desc");
-        InputStream inputStream = null;
-        Part filePart = request.getPart("img");
-
-        HashMap<Integer, String> images = new HashMap<>();
-        if (filePart != null) {
-            inputStream = filePart.getInputStream();
-        }
         try {
-            if (request.getSession().getAttribute("user_session") == null) {
-                errors.add("You must be logged in to upload!");
-                request.setAttribute("errors", errors);
-                request.getRequestDispatcher("LoginView.jsp").forward(request, response);
-            } else {
-                String user = request.getSession().getAttribute("user_session").toString();
-                ImageDAO.getInstance().insertImage(name, inputStream, desc,user);
-                images = ImageDAO.getInstance().getImageList();
-                request.setAttribute("images", images);
-                
-            }
-            //update list of images
-        } catch (SQLException ex) {
-            Logger.getLogger(UploadController.class.getName()).log(Level.SEVERE, null, ex);
+            OutputStream out = new FileOutputStream("E:\\Glassfish\\glassfish-4.1.1\\glassfish\\domains\\domain1\\docroot\\tmp.jpg");
+            InputStream in = ImageDAO.getInstance().getImage(Integer.parseInt(request.getParameter("id")));
+            String name=request.getParameter("name");
+            int id=Integer.parseInt(request.getParameter("id"));
+            byte[] buff = new byte[1024];
+            int bytesRead;
+            while((bytesRead = in.read(buff)) !=-1)
+                out.write(buff, 0, bytesRead);
+            
+            String path="E:\\Glassfish\\glassfish-4.1.1\\glassfish\\domains\\domain1\\docroot\\tmp.jpg";
+            in.close();
+            out.flush();
+            out.close();
+            
+            response.setContentType("image");
+            request.setAttribute("name", name);
+            request.setAttribute("id", id);
+            request.setAttribute("comments", CommentDAO.getInstance().getComments(id));
+            request.setAttribute("imageRequest", "/tmp.jpg");
+            request.getRequestDispatcher("ImageView.jsp").forward(request, response);
+
+        } catch (FileNotFoundException | SQLException ex) {
+            Logger.getLogger(ImageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        System.out.println(request.getParameter("id"));
+        
+        //}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

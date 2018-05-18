@@ -1,6 +1,10 @@
+<%@page import="DAO.ImageDAO"%>
 <%@ page pageEncoding="UTF-8" %>
 <%@ page import="java.io.IOException"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.io.InputStream"%>
+<%@ page import="java.io.OutputStream"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -10,8 +14,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    
-    
+
+
     <body>
         <%!
             public void jspInit() {
@@ -21,24 +25,28 @@
         %>
         <div id="content">
             <%@ include file="WEB-INF/nav.jspf"%>
-            <h1>Image View</h1>   
-            <form method="post"  action="UploadController" enctype="multipart/form-data"> 
-                <div class="form-element">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" required>
-                </div>
-                <div class="form-element">
-                    <label for="desc">Description</label>
-                    <input type="text" name="desc" id="desc" required>
-                </div>
-                <div class="form-element">
-                    <label for="img">Image</label>
-                    <input type="file" name="img" id="img" accept="image/*" required>
-                </div>
+            <h1>${requestScope.name}</h1> 
+            <div class="image">
+                <img src="${request.contextPath}${requestScope.imageRequest}">
+            </div>
+            <div class="comment">
+                <form method="post"  action="CommentController?id=${requestScope.id}&name=${requestScope.name}&imageRequest=${requestScope.imageRequest}"> 
+                    <div class="form-element">
+                        <label for="comment">Post a comment!</label>
+                        <input type="text" name="comment" id="comment" required>
+                    </div>
+                    <div class="form-element">
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Reset">
+                    </div>
+            </div>
+            <div class="commentList">
+                <c:forEach items="${requestScope.comments}" var="comment">
+                    <p> - ${comment.getUser()}: ${comment.getContent()}</p>
+                    <p></p>
+                </c:forEach>
+            </div>
         </div> 
-        <div class="form-element">
-            <input type="submit" value="Submit">
-            <input type="reset" value="Reset">
-        </div>
+
     </body>
 </html>
