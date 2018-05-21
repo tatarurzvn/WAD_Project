@@ -37,7 +37,7 @@
                 </div>
         </div> 
         <div class="form-element">
-            <input type="submit" value="Submit">
+            <input type="submit" value="Upload">
             <input type="reset" value="Reset">
         </div>
     </body>

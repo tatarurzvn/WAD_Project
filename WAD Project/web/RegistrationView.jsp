@@ -19,6 +19,7 @@
 
         %>
         <%@ include file="WEB-INF/nav.jspf"%>
+        <div class="register">
         <h1>Register</h1>   
             <form method="post"  action="RegistrationController"> 
                 <div class="form-element">
@@ -54,5 +55,6 @@
         <c:forEach items="${requestScope.RegistrationErrors}" var="error">
             <p>${error}</p>
         </c:forEach>
+        </div>
     </body>
 </html>

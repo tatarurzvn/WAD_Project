@@ -18,7 +18,7 @@
 
         %>
         <%@ include file="WEB-INF/nav.jspf"%>
-        <div>
+        <div class="content">
             <h1>Emojo</h1>
             <%if (request.getSession().getAttribute("user_session") != null) { %>
             <h2>Hello, ${sessionScope.user_session}!</h2> 
@@ -38,5 +38,9 @@
                 </tr>
             </table>
         </div>
+            
+        <div class="footer">
+            <!--<p>Fell free to post a picture!</p><!-->
+            <img src=""/home/tatarurzvn/glassfish-4.1.1/glassfish/domains/domain1/docroot/tmp.jpg/>
     </body>
 </html>

@@ -1,15 +1,82 @@
 body {
-   background-color: #cccccc;
-   text-align: center;
-   font-family: "Arial"
+   background-color:#B3EE3A;
+   font-family: "Comic Sans Ms";
 }
 
-h1 {
-	font-size:10vw
+.content {
+
+    width:100%;
+    height: 100%;
+    background-color:#B3EE3A;
+    padding-top: 20px;
+    margin-bottom: 0;
+    margin:0 auto;
+    
 }
 
-h2 {
-    font-size:5vw
+.top {
+
+  width: 100%;
+  height:100%;
+  background-color:#285328;
+  border-radius: 30px 30px 0px 0px;
+  text-align:center
+}
+
+.navigation{
+
+  position: relative;
+  text-align: center;
+  margin:0 auto;
+
+}
+
+.navigation ul{
+
+  background-color: #ffffff;
+  padding: 15px 0;
+ 
+}
+
+.navigation li{
+
+  display: inline-block;
+}
+
+.navigation ul li a{
+
+  color: #8B8B00;
+  text-decoration: none;
+  padding: 20px;
+}
+
+.navigation ul li a:hover{
+
+  background-color: #003300;
+  border-bottom: 2px solid #D3CBBD;
+}
+
+.content h1{
+  text-shadow: 0px 1px 2px  #003300 ;
+  font-family: Comic Sans Ms;
+  font-size: 50px;
+  text-align: center;
+
+}
+
+.content h2 {
+  text-shadow: 0px 1px 2px  #003300 ;
+  font-family: Comic Sans Ms;
+  font-size: 30px;
+  text-align: center;
+
+}
+
+.register h1 {
+    text-shadow: 0px 1px 2px  #003300 ;
+  font-family: Comic Sans Ms;
+  font-size: 50px;
+  text-align: center;
 }
 
 ul {
@@ -40,4 +107,80 @@ table {
 td {
     padding-left: 5px;
     padding-right: 5px;
+}
+
+ input[type="email"],
+ input[type="text"], input[type="password"] {
+  width: 100px;
+  display: inline-block;
+  margin-bottom: 12px;
+  text-align: center;
+  border: 2px solid #285328;
+  border-radius: 3px;
+  position: relative;
+  float: center; 
+}
+
+input[type="submit"], input[type="reset"]{
+  width: 100px;
+  display:inline-block;
+  margin-bottom: 12px;
+  text-align: center;
+  border: 2px solid #285328;
+  border-radius: 3px;
+  background-color: #285328;
+  text-shadow: 0px 1px 2px  #e5ffe5;
+  font-size:17px;
+  cursor: pointer;
+  
+}  
+  input[type="file"]{
+  margin-bottom: 12px;
+  text-align: center;
+  border: 2px solid #285328;
+  border-radius: 3px;
+  background-color: #285328;
+  text-shadow: 0px 1px 2px  #e5ffe5;
+  font-size:10px;
+  }
+
+  #fname, #email,#lname, #uname, #password,
+  #rPassword, #name, #desc {
+      height:21px;
+      width:150px;
+      float: center;
+      position:relative;
+  }
+
+/*#comment { 
+  margin-bottom: 12px;
+  border: 2px solid #285328;
+  border-radius: 3px;
+  float:center;
+  position:relative;
+}
+
+#comment {
+    height:21px;
+    width:150px;
+    float: center;
+    position:relative;
+}*/
+
+/*.image, .comment, .commentList {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}*/
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
